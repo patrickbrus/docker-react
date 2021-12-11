@@ -17,6 +17,6 @@ jobs:
     - name: Login to DockerHub Registry
       run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build -t ga63qes/docker-react -f Dockerfile.dev .
     - name: Run the tests by running the Docker image
       run: docker run -e CI=true ga63qes/docker-react npm run test
