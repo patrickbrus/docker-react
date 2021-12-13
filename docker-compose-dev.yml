@@ -1,0 +1,20 @@
+version: '3'
+services:
+  web:
+    stdin_open: true # fix bug of exiting react app 
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /home/node/app/node_modules
+      - .:/home/node/app
+  tests: # service for testing
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /home/node/app/node_modules
+      - .:/home/node/app
+    command: ["npm", "run", "test"] # override default start command from Dockerfile.dev
